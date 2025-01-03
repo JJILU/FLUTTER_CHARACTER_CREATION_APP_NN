@@ -1,3 +1,4 @@
+import 'package:character_creation_app/models/character.dart';
 import 'package:character_creation_app/models/vocation.dart';
 import 'package:character_creation_app/screens/create/vocation_card.dart';
 import 'package:character_creation_app/shared/styled_button.dart';
@@ -6,6 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:character_creation_app/shared/styled_text.dart';
 import 'package:character_creation_app/theme.dart';
+import 'package:uuid/uuid.dart';
+
+var uuid = const Uuid();
 
 class Create extends StatefulWidget {
   const Create({super.key});
@@ -38,16 +42,20 @@ class _CreateState extends State<Create> {
   // submit handler
   void handleSubmit() {
     if (_nameController.text.trim().isEmpty) {
-      print('name must not empty');
+      // show error dialog
       return;
     }
     if (_sloganController.text.trim().isEmpty) {
-      print('slogan must not empty');
+      // show error dialog
       return;
     }
 
-    print(_nameController.text);
-    print(_sloganController.text);
+    characters.add(Character(
+      name: _nameController.text.trim(),
+      slogan: _sloganController.text.trim(),
+      vocation: selectedVocation,
+      id: uuid.v4()
+    ));
   }
 
   @override
@@ -140,21 +148,42 @@ class _CreateState extends State<Create> {
 
               // vocation cards
               VocationCard(
-                selected: selectedVocation == Vocation.junkie,
-                onTap: updateVocation,
-                vocation: Vocation.junkie),
-             VocationCard(
-                selected: selectedVocation == Vocation.ninja,
-                onTap: updateVocation,
-                vocation: Vocation.ninja),
+                  selected: selectedVocation == Vocation.junkie,
+                  onTap: updateVocation,
+                  vocation: Vocation.junkie),
               VocationCard(
-                selected: selectedVocation == Vocation.raider,
-                onTap: updateVocation,
-                vocation: Vocation.raider),
+                  selected: selectedVocation == Vocation.ninja,
+                  onTap: updateVocation,
+                  vocation: Vocation.ninja),
               VocationCard(
-                selected: selectedVocation == Vocation.algorithmic,
-                onTap: updateVocation,
-                vocation: Vocation.algorithmic),
+                  selected: selectedVocation == Vocation.raider,
+                  onTap: updateVocation,
+                  vocation: Vocation.raider),
+              VocationCard(
+                  selected: selectedVocation == Vocation.algorithmic,
+                  onTap: updateVocation,
+                  vocation: Vocation.algorithmic),
+              
+              // goodluck message
+              Center(
+                child: Icon(
+                  Icons.code,
+                  color: AppColors.primaryColor,
+                ),
+              ),
+
+              const Center(
+                child: StyledHeading('Good Luck.'),
+              ),
+
+              const Center(
+                child: StyledText('Enjoy the journey...'),
+              ),
+
+              const SizedBox(
+                height: 30,
+              ),
+
 
               Center(
                 child: StyledButton(
