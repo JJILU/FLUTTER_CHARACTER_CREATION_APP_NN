@@ -37,7 +37,7 @@ class _HomeState extends State<Home> {
             ),
             StyledButton(
               onPressed: () {},
-              child: StyledHeading(
+              child: const StyledHeading(
                 'Create New',
               ),
             ),

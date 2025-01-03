@@ -10,7 +10,7 @@ class StyledButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(onPressed: onPressed, child: Container(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         vertical: 10,
         horizontal: 20
       ),

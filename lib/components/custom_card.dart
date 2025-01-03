@@ -10,8 +10,8 @@ class CustomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: color,
-      padding: EdgeInsets.all(40),
-      margin: EdgeInsets.only(bottom: 40),
+      padding: const EdgeInsets.all(40),
+      margin: const EdgeInsets.only(bottom: 40),
       child: Text(text),
     );
   }
